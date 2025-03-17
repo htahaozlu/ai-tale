@@ -1,7 +1,8 @@
+import 'package:ai_tale/screens/auth/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ai_tale/providers/auth_provider.dart';
-import 'package:ai_tale/screens/personalization/character_selection_screen.dart';
+import 'package:ai_tale/screens/welcome_screen.dart';
 import 'package:ai_tale/theme/app_theme.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -37,12 +38,7 @@ class _SignInScreenState extends State<SignInScreen> {
       setState(() => _isLoading = false);
 
       if (success && mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const CharacterSelectionScreen(),
-          ),
-        );
+        Navigator.pushReplacementNamed(context, '/welcome');
       } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -90,6 +86,10 @@ class _SignInScreenState extends State<SignInScreen> {
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(),
+                      labelStyle: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 16,
+                      ),
                     ),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
@@ -110,6 +110,10 @@ class _SignInScreenState extends State<SignInScreen> {
                       filled: true,
                       fillColor: Colors.white,
                       border: const OutlineInputBorder(),
+                      labelStyle: const TextStyle(
+                        color: Colors.black54,
+                        fontSize: 16,
+                      ),
                       suffixIcon: IconButton(
                         icon: Icon(
                           _obscurePassword ? Icons.visibility_off : Icons.visibility,
@@ -179,13 +183,19 @@ class _SignInScreenState extends State<SignInScreen> {
                       const Text("Don't have an account? "),
                       TextButton(
                         onPressed: () {
-                          // TODO: Navigate to sign up
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignUpScreen(),
+                            ),
+                          );
                         },
                         child: const Text(
                           'Sign Up',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.blue,
+                            fontSize: 16,
                           ),
                         ),
                       ),

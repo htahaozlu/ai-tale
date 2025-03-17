@@ -1,146 +1,133 @@
 import 'package:flutter/material.dart';
-import 'package:ai_tale/screens/personalization/theme_selection_screen.dart';
-import 'package:ai_tale/theme/app_theme.dart';
 
-class CharacterSelectionScreen extends StatefulWidget {
+class CharacterSelectionScreen extends StatelessWidget {
   const CharacterSelectionScreen({super.key});
 
   @override
-  State<CharacterSelectionScreen> createState() => _CharacterSelectionScreenState();
-}
+  Widget build(BuildContext context) {
+    final characters = [
+      {'name': 'Wizard', 'image': 'assets/images/backgrounds/wizard.jpg'},
+      {'name': 'Knight', 'image': 'assets/images/backgrounds/knight.jpg'},
+      {'name': 'Princess', 'image': 'assets/images/backgrounds/princess.jpg'},
+      {'name': 'Dinosaur', 'image': 'assets/images/backgrounds/dinosaur.jpg'},
+    ];
 
-class _CharacterSelectionScreenState extends State<CharacterSelectionScreen> {
-  int? _selectedCharacterIndex;
-
-  final List<Map<String, dynamic>> _characters = [
-    {
-      'name': 'Prenses',
-      'icon': Icons.face,
-      'color': Colors.pink,
-    },
-    {
-      'name': 'Şövalye',
-      'icon': Icons.security,
-      'color': Colors.blue,
-    },
-    {
-      'name': 'Büyücü',
-      'icon': Icons.auto_fix_high,
-      'color': Colors.purple,
-    },
-    {
-      'name': 'Kaşif',
-      'icon': Icons.explore,
-      'color': Colors.green,
-    },
-  ];
-
-  void _handleCharacterSelection(int index) {
-    setState(() {
-      _selectedCharacterIndex = index;
-    });
-  }
-
-  void _navigateToThemeSelection() {
-    if (_selectedCharacterIndex != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ThemeSelectionScreen(
-            character: _characters[_selectedCharacterIndex!],
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/backgrounds/magic_forest.jpg'),
+            fit: BoxFit.cover,
           ),
         ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Lütfen bir karakter seçin'),
-          backgroundColor: AppTheme.errorColor,
-        ),
-      );
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Karakterini Seç'),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
+        child: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                'Hikayenin Kahramanını Seç',
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Masalının ana karakterini seç ve macerana başla',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
               const SizedBox(height: 32),
+              Text(
+                'Choose Your Character',
+                style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  color: Colors.white,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    const Shadow(
+                      offset: Offset(0, 2),
+                      blurRadius: 4,
+                      color: Colors.black45,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
               Expanded(
                 child: GridView.builder(
+                  padding: const EdgeInsets.all(16),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
+                    childAspectRatio: 0.75,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
                   ),
-                  itemCount: _characters.length,
+                  itemCount: characters.length,
                   itemBuilder: (context, index) {
-                    final character = _characters[index];
-                    final isSelected = _selectedCharacterIndex == index;
-
-                    return GestureDetector(
-                      onTap: () => _handleCharacterSelection(index),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? character['color'].withOpacity(0.2)
-                              : AppTheme.surfaceColor,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(
-                            color: isSelected
-                                ? character['color']
-                                : Colors.transparent,
-                            width: 2,
-                          ),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              character['icon'],
-                              size: 48,
-                              color: character['color'],
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              character['name'],
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.copyWith(
-                                color: character['color'],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    return CharacterCard(
+                      name: characters[index]['name']!,
+                      imagePath: characters[index]['image']!,
                     );
                   },
                 ),
               ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: _navigateToThemeSelection,
-                child: const Text('Devam Et'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CharacterCard extends StatelessWidget {
+  final String name;
+  final String imagePath;
+
+  const CharacterCard({
+    super.key,
+    required this.name,
+    required this.imagePath,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        // TODO: Implement character selection
+        Navigator.pushNamed(context, '/theme-selection');
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.asset(
+                imagePath,
+                fit: BoxFit.cover,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.black.withOpacity(0.7),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 16,
+                left: 16,
+                right: 16,
+                child: Text(
+                  name,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ],
           ),

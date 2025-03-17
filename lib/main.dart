@@ -1,7 +1,10 @@
+import 'package:ai_tale/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ai_tale/providers/auth_provider.dart';
-import 'package:ai_tale/screens/welcome_screen.dart';
+import 'package:ai_tale/screens/auth/sign_in_screen.dart';
+import 'package:ai_tale/screens/personalization/character_selection_screen.dart';
+import 'package:ai_tale/screens/personalization/theme_selection_screen.dart';
 import 'package:ai_tale/theme/app_theme.dart';
 
 void main() {
@@ -23,7 +26,13 @@ class MyApp extends StatelessWidget {
         title: 'AI-Tale',
         theme: AppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
-        home: const WelcomeScreen(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const SignInScreen(),
+          '/welcome': (context) => const WelcomeScreen(),
+          '/character-selection': (context) => const CharacterSelectionScreen(),
+          '/theme-selection': (context) => const ThemeSelectionScreen(),
+        },
       ),
     );
   }
