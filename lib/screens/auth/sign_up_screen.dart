@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ai_tale/providers/auth_provider.dart';
-import 'package:ai_tale/screens/personalization/character_selection_screen.dart';
+import 'package:ai_tale/widgets/custom_input.dart';
 import 'package:ai_tale/theme/app_theme.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -40,12 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() => _isLoading = false);
 
       if (success && mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const CharacterSelectionScreen(),
-          ),
-        );
+        Navigator.pushReplacementNamed(context, '/welcome');
       } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -79,29 +74,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Text(
                     'Create Account',
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      color: Colors.black,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFF2D3142),
+                      fontSize: 24,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
                     ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
-                  Text(
+                  const Text(
                     'Join the world of personalized stories',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Colors.black87,
+                    style: TextStyle(
+                      color: Color(0xFF666666),
+                      fontSize: 16,
+                      fontFamily: 'Inter',
                     ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 48),
-                  TextFormField(
+                  CustomInput(
                     controller: _emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(),
-                    ),
+                    label: 'Email',
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -113,25 +106,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 16),
-                  TextFormField(
+                  const SizedBox(height: 24),
+                  CustomInput(
                     controller: _passwordController,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: const OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
-                        },
-                      ),
-                    ),
+                    label: 'Password',
                     obscureText: _obscurePassword,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -142,26 +120,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       }
                       return null;
                     },
-                  ),
-                  const SizedBox(height: 16),
-                  TextFormField(
-                    controller: _confirmPasswordController,
-                    decoration: InputDecoration(
-                      labelText: 'Confirm Password',
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: const OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _obscureConfirmPassword = !_obscureConfirmPassword;
-                          });
-                        },
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                        color: const Color(0xFF666666),
                       ),
+                      onPressed: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
                     ),
+                  ),
+                  const SizedBox(height: 24),
+                  CustomInput(
+                    controller: _confirmPasswordController,
+                    label: 'Confirm Password',
                     obscureText: _obscureConfirmPassword,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -172,15 +146,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       }
                       return null;
                     },
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
+                        color: const Color(0xFF666666),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureConfirmPassword = !_obscureConfirmPassword;
+                        });
+                      },
+                    ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 32),
                   ElevatedButton(
                     onPressed: _isLoading ? null : _handleSignUp,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: const Color(0xFF6C63FF),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                     child: _isLoading
@@ -196,7 +181,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       'Create Account',
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Inter',
                       ),
                     ),
                   ),
@@ -204,7 +190,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Already have an account? '),
+                      const Text(
+                        'Already have an account? ',
+                        style: TextStyle(
+                          color: Color(0xFF666666),
+                          fontFamily: 'Inter',
+                        ),
+                      ),
                       TextButton(
                         onPressed: () {
                           Navigator.pop(context);
@@ -212,8 +204,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: const Text(
                           'Sign In',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
+                            color: Color(0xFF6C63FF),
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Inter',
                           ),
                         ),
                       ),

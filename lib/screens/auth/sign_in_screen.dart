@@ -2,8 +2,8 @@ import 'package:ai_tale/screens/auth/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ai_tale/providers/auth_provider.dart';
-import 'package:ai_tale/screens/welcome_screen.dart';
 import 'package:ai_tale/theme/app_theme.dart';
+import 'package:ai_tale/widgets/custom_input.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -70,27 +70,29 @@ class _SignInScreenState extends State<SignInScreen> {
                 children: [
                   const SizedBox(height: 60),
                   Text(
-                    'Hello, Storyteller!',
+                    'Welcome to WhisperTales',
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      color: Colors.black,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFF2D3142),
+                      fontSize: 24,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Where magic meets your imagination!',
+                    style: TextStyle(
+                      color: Color(0xFF666666),
+                      fontSize: 16,
+                      fontFamily: 'Inter',
                     ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 48),
-                  TextFormField(
+                  CustomInput(
                     controller: _emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(),
-                      labelStyle: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 16,
-                      ),
-                    ),
+                    label: 'Email',
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -103,28 +105,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     },
                   ),
                   const SizedBox(height: 16),
-                  TextFormField(
+                  CustomInput(
                     controller: _passwordController,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: const OutlineInputBorder(),
-                      labelStyle: const TextStyle(
-                        color: Colors.black54,
-                        fontSize: 16,
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
-                        },
-                      ),
-                    ),
+                    label: 'Password',
                     obscureText: _obscurePassword,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -135,6 +118,17 @@ class _SignInScreenState extends State<SignInScreen> {
                       }
                       return null;
                     },
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                        color: const Color(0xFF666666),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Align(
@@ -145,7 +139,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       },
                       child: const Text(
                         'Forgot Password?',
-                        style: TextStyle(color: Colors.blue),
+                        style: TextStyle(
+                          color: Color(0xFF6C63FF),
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),
@@ -153,7 +151,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ElevatedButton(
                     onPressed: _isLoading ? null : _handleSignIn,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: const Color(0xFF6C63FF),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -172,7 +170,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       'Login',
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Inter',
                       ),
                     ),
                   ),
