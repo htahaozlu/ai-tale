@@ -86,8 +86,7 @@ class ThemeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO: Implement theme selection
-        Navigator.pushNamed(context, '/story-creation');
+        Navigator.pushReplacementNamed(context, '/write-tale');
       },
       child: Container(
         height: 200,

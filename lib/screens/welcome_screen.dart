@@ -23,7 +23,7 @@ class WelcomeScreen extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 32),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/character-selection');
+                    Navigator.pushReplacementNamed(context, '/home');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white.withOpacity(0.2),
