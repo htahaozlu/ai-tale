@@ -10,7 +10,7 @@ class AppTheme {
   static const Color textColor = Color(0xFFFFFFFF);
   static const Color errorColor = Color(0xFFFF6B6B);
 
-  static ThemeData lightTheme = ThemeData(
+  static ThemeData darkTheme = ThemeData(
     primaryColor: primaryColor,
     scaffoldBackgroundColor: backgroundColor,
     colorScheme: const ColorScheme.dark(

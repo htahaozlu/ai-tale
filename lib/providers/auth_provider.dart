@@ -11,7 +11,6 @@ class AuthProvider extends ChangeNotifier {
 
   Future<bool> signIn(String email, String password) async {
     try {
-      // TODO: Implement actual authentication logic
       await _storage.write(key: 'email', value: email);
       _email = email;
       _isAuthenticated = true;
@@ -24,7 +23,6 @@ class AuthProvider extends ChangeNotifier {
 
   Future<bool> signUp(String email, String password) async {
     try {
-      // TODO: Implement actual registration logic
       await _storage.write(key: 'email', value: email);
       _email = email;
       _isAuthenticated = true;
