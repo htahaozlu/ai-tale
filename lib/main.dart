@@ -7,6 +7,7 @@ import 'package:ai_tale/screens/home_screen.dart';
 import 'package:ai_tale/screens/personalization/character_selection_screen.dart';
 import 'package:ai_tale/screens/personalization/theme_selection_screen.dart';
 import 'package:ai_tale/screens/write_tale_screen.dart';
+import 'package:ai_tale/screens/onboarding_screen.dart';
 import 'package:ai_tale/theme/app_theme.dart';
 
 void main() {
@@ -28,8 +29,9 @@ class MyApp extends StatelessWidget {
         title: 'AI-Tale',
         theme: AppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
-        initialRoute: '/',
+        initialRoute: '/onboarding',
         routes: {
+          '/onboarding': (context) => const OnboardingScreen(),
           '/': (context) => const SignInScreen(),
           '/welcome': (context) => const WelcomeScreen(),
           '/home': (context) => const HomeScreen(),
