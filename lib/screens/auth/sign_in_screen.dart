@@ -1,3 +1,4 @@
+import 'package:ai_tale/constants/colors.dart';
 import 'package:ai_tale/screens/auth/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   Text(
                     'Welcome to WhisperTales',
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      color: const Color(0xFF2D3142),
+                      color: AppColors.primary,
                       fontSize: 24,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w600,

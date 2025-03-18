@@ -55,165 +55,157 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/backgrounds/auth_background.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(height: 60),
-                  Text(
-                    'Create Account',
-                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      color: const Color(0xFF2D3142),
-                      fontSize: 24,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.center,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: 60),
+                Text(
+                  'Create Account',
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                    color: const Color(0xFF2D3142),
+                    fontSize: 24,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Join the world of personalized stories',
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Join the world of personalized stories',
+                  style: TextStyle(
+                    color: Color(0xFF666666),
+                    fontSize: 16,
+                    fontFamily: 'Inter',
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 48),
+                CustomInput(
+                  controller: _emailController,
+                  label: 'Email',
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Email is required';
+                    }
+                    if (!value.contains('@')) {
+                      return 'Please enter a valid email';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 24),
+                CustomInput(
+                  controller: _passwordController,
+                  label: 'Password',
+                  obscureText: _obscurePassword,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Password is required';
+                    }
+                    if (value.length < 6) {
+                      return 'Password must be at least 6 characters';
+                    }
+                    return null;
+                  },
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                      color: const Color(0xFF666666),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
+                ),
+                const SizedBox(height: 24),
+                CustomInput(
+                  controller: _confirmPasswordController,
+                  label: 'Confirm Password',
+                  obscureText: _obscureConfirmPassword,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Password confirmation is required';
+                    }
+                    if (value != _passwordController.text) {
+                      return 'Passwords do not match';
+                    }
+                    return null;
+                  },
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
+                      color: const Color(0xFF666666),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureConfirmPassword = !_obscureConfirmPassword;
+                      });
+                    },
+                  ),
+                ),
+                const SizedBox(height: 32),
+                ElevatedButton(
+                  onPressed: _isLoading ? null : _handleSignUp,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF6C63FF),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: _isLoading
+                      ? const SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Colors.white,
+                    ),
+                  )
+                      : const Text(
+                    'Create Account',
                     style: TextStyle(
-                      color: Color(0xFF666666),
                       fontSize: 16,
+                      fontWeight: FontWeight.w600,
                       fontFamily: 'Inter',
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 48),
-                  CustomInput(
-                    controller: _emailController,
-                    label: 'Email',
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Email is required';
-                      }
-                      if (!value.contains('@')) {
-                        return 'Please enter a valid email';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 24),
-                  CustomInput(
-                    controller: _passwordController,
-                    label: 'Password',
-                    obscureText: _obscurePassword,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Password is required';
-                      }
-                      if (value.length < 6) {
-                        return 'Password must be at least 6 characters';
-                      }
-                      return null;
-                    },
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                        color: const Color(0xFF666666),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  CustomInput(
-                    controller: _confirmPasswordController,
-                    label: 'Confirm Password',
-                    obscureText: _obscureConfirmPassword,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Password confirmation is required';
-                      }
-                      if (value != _passwordController.text) {
-                        return 'Passwords do not match';
-                      }
-                      return null;
-                    },
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
-                        color: const Color(0xFF666666),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureConfirmPassword = !_obscureConfirmPassword;
-                        });
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  ElevatedButton(
-                    onPressed: _isLoading ? null : _handleSignUp,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF6C63FF),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: _isLoading
-                        ? const SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: Colors.white,
-                      ),
-                    )
-                        : const Text(
-                      'Create Account',
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Already have an account? ',
                       style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF666666),
                         fontFamily: 'Inter',
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Already have an account? ',
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        'Sign In',
                         style: TextStyle(
-                          color: Color(0xFF666666),
+                          color: Color(0xFF6C63FF),
+                          fontWeight: FontWeight.w600,
                           fontFamily: 'Inter',
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text(
-                          'Sign In',
-                          style: TextStyle(
-                            color: Color(0xFF6C63FF),
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Inter',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
