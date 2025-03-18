@@ -43,6 +43,7 @@ class HomeScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.pushNamed(context, '/character-selection');
                       },
+                      imagePath: 'assets/images/backgrounds/write.png',
                       gradient: AppColors.primaryGradient,
                     ),
 
@@ -54,6 +55,7 @@ class HomeScreen extends StatelessWidget {
                       width: double.infinity,
                       onTap: () {},
                       gradient: AppColors.cardGradient,
+                      imagePath: 'assets/images/backgrounds/visualize.png',
                     ),
 
                     const SizedBox(height: 32),
