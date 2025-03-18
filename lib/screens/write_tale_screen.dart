@@ -59,6 +59,7 @@ class _WriteTaleScreenState extends State<WriteTaleScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
+                    // Text Input Area
                     Expanded(
                       child: Container(
                         padding: const EdgeInsets.all(16),
@@ -90,10 +91,12 @@ class _WriteTaleScreenState extends State<WriteTaleScreen> {
                             ),
                           ],
                         ),
-
                       ),
                     ),
 
+                    const SizedBox(height: 16),
+
+                    // Ad Section
                     Container(
                       width: double.infinity,
                       height: 50,
@@ -114,6 +117,7 @@ class _WriteTaleScreenState extends State<WriteTaleScreen> {
 
                     const SizedBox(height: 16),
 
+                    // Start Journey Button
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
