@@ -8,6 +8,9 @@ import 'package:ai_tale/screens/personalization/character_selection_screen.dart'
 import 'package:ai_tale/screens/personalization/theme_selection_screen.dart';
 import 'package:ai_tale/screens/write_tale_screen.dart';
 import 'package:ai_tale/screens/onboarding_screen.dart';
+import 'package:ai_tale/screens/history_page.dart';
+import 'package:ai_tale/screens/suggested_stories.dart';
+import 'package:ai_tale/screens/tale_screen.dart';
 import 'package:ai_tale/theme/app_theme.dart';
 
 void main() {
@@ -29,15 +32,18 @@ class MyApp extends StatelessWidget {
         title: 'AI-Tale',
         theme: AppTheme.darkTheme,
         debugShowCheckedModeBanner: false,
-        initialRoute: '/onboarding',
+        initialRoute: '/onboarding', 
         routes: {
           '/onboarding': (context) => const OnboardingScreen(),
           '/': (context) => const SignInScreen(),
           '/welcome': (context) => const WelcomeScreen(),
-          '/home': (context) => const HomeScreen(),
+          '/home': (context) => const HomeScreen(), 
           '/character-selection': (context) => const CharacterSelectionScreen(),
           '/theme-selection': (context) => const ThemeSelectionScreen(),
           '/write-tale': (context) => const WriteTaleScreen(),
+          '/suggested-stories': (context) =>  SuggestedStories(),
+          '/story-page': (context) => StoryPage(),
+          '/history': (context) => HistoryPage(),
         },
       ),
     );

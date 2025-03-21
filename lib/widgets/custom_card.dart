@@ -33,12 +33,13 @@ class CustomCard extends StatelessWidget {
         width: width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          gradient: gradient,
+          gradient: gradient ?? AppColors.cardGradient, // 📌 Varsayılan gradient
+          color: gradient == null && imagePath == null ? AppColors.cardBackground : null, // 📌 Varsayılan renk
           image: imagePath != null
               ? DecorationImage(
-            image: AssetImage(imagePath!),
-            fit: BoxFit.cover,
-          )
+                  image: AssetImage(imagePath!),
+                  fit: BoxFit.cover,
+                )
               : null,
           boxShadow: const [
             BoxShadow(
@@ -51,7 +52,7 @@ class CustomCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            gradient: AppColors.overlayGradient,
+            gradient: gradient == null ? AppColors.overlayGradient : null, // 📌 Eğer gradient varsa overlay ekleme
           ),
           padding: const EdgeInsets.all(16),
           child: Column(

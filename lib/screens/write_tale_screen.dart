@@ -1,3 +1,4 @@
+import 'package:ai_tale/constants/navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class WriteTaleScreen extends StatefulWidget {
@@ -10,6 +11,12 @@ class WriteTaleScreen extends StatefulWidget {
 class _WriteTaleScreenState extends State<WriteTaleScreen> {
   final TextEditingController _taleController = TextEditingController();
   int maxLength = 1000;
+
+  // Define the function to handle bottom navigation item taps
+  void _onItemTapped(int index) {
+    // Implement your navigation logic here
+    print("Selected bottom navigation index: $index");
+  }
 
   @override
   void dispose() {
@@ -48,7 +55,7 @@ class _WriteTaleScreenState extends State<WriteTaleScreen> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  const SizedBox(width: 40), // To balance the back button
+                  const SizedBox(width: 40), 
                 ],
               ),
             ),
@@ -122,7 +129,7 @@ class _WriteTaleScreenState extends State<WriteTaleScreen> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/home');
+                          Navigator.pushReplacementNamed(context, '/story-page');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF6C63FF),
@@ -150,6 +157,7 @@ class _WriteTaleScreenState extends State<WriteTaleScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: CustomBottomNavBar(onItemTapped: _onItemTapped), // Pass the _onItemTapped function here
     );
   }
 }

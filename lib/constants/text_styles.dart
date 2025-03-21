@@ -16,12 +16,24 @@ class AppTextStyles {
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w600,
   );
+  static const TextStyle textbutton= TextStyle(
+    color: AppColors.textbuttoncl,
+    fontSize: 14,
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.bold
+  );
 
   static const TextStyle cardTitle = TextStyle(
     color: AppColors.textPrimary,
     fontSize: 24,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w600,
+  );
+  static const TextStyle navbar = TextStyle(
+    color: AppColors.textbottombar,
+    fontSize: 9.32,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w400,
   );
 
   static const TextStyle subtitle = TextStyle(

@@ -1,0 +1,2 @@
+C:/Users/can/Documents/GitHub/ai-tale/android/app/.cxx/Debug/29g2y4am/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/can/Documents/GitHub/ai-tale/android/app/.cxx/Debug/29g2y4am/x86_64/CMakeFiles/rebuild_cache.dir
