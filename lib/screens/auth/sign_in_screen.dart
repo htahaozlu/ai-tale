@@ -1,8 +1,10 @@
 import 'package:ai_tale/constants/colors.dart';
+import 'package:ai_tale/constants/text_styles.dart';
 import 'package:ai_tale/screens/auth/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ai_tale/providers/auth_provider.dart';
+import 'package:ai_tale/providers/theme_provider.dart';
 import 'package:ai_tale/theme/app_theme.dart';
 import 'package:ai_tale/widgets/custom_input.dart';
 
@@ -53,7 +55,11 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    AppColors.setTheme(themeProvider.isDarkMode);
+
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
@@ -65,21 +71,22 @@ class _SignInScreenState extends State<SignInScreen> {
                 const SizedBox(height: 60),
                 Text(
                   'Welcome to WhisperTales',
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  style: AppTextStyles.heading.copyWith(
                     color: AppColors.primary,
-                    fontSize: 24,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
+                    fontSize: themeProvider.fontSize * 1.5,
+                    height: themeProvider.lineHeight,
+                    letterSpacing: themeProvider.letterSpacing,
                   ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
-                const Text(
+                Text(
                   'Where magic meets your imagination!',
-                  style: TextStyle(
-                    color: Color(0xFF666666),
-                    fontSize: 16,
-                    fontFamily: 'Inter',
+                  style: AppTextStyles.body.copyWith(
+                    color: AppColors.textSecondary,
+                    fontSize: themeProvider.fontSize,
+                    height: themeProvider.lineHeight,
+                    letterSpacing: themeProvider.letterSpacing,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -115,7 +122,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                      color: const Color(0xFF666666),
+                      color: AppColors.textSecondary,
                     ),
                     onPressed: () {
                       setState(() {
@@ -131,12 +138,13 @@ class _SignInScreenState extends State<SignInScreen> {
                     onPressed: () {
                       // TODO: Implement forgot password
                     },
-                    child: const Text(
+                    child: Text(
                       'Forgot Password?',
-                      style: TextStyle(
-                        color: Color(0xFF6C63FF),
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w500,
+                      style: AppTextStyles.body.copyWith(
+                        color: AppColors.primary,
+                        fontSize: themeProvider.fontSize,
+                        height: themeProvider.lineHeight,
+                        letterSpacing: themeProvider.letterSpacing,
                       ),
                     ),
                   ),
@@ -145,7 +153,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ElevatedButton(
                   onPressed: _isLoading ? null : _handleSignIn,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF6C63FF),
+                    backgroundColor: AppColors.primary,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -160,12 +168,12 @@ class _SignInScreenState extends State<SignInScreen> {
                       color: Colors.white,
                     ),
                   )
-                      : const Text(
+                      : Text(
                     'Login',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Inter',
+                    style: AppTextStyles.button.copyWith(
+                      fontSize: themeProvider.fontSize,
+                      height: themeProvider.lineHeight,
+                      letterSpacing: themeProvider.letterSpacing,
                     ),
                   ),
                 ),
@@ -173,7 +181,15 @@ class _SignInScreenState extends State<SignInScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account? "),
+                    Text(
+                      "Don't have an account? ",
+                      style: AppTextStyles.body.copyWith(
+                        color: AppColors.textSecondary,
+                        fontSize: themeProvider.fontSize,
+                        height: themeProvider.lineHeight,
+                        letterSpacing: themeProvider.letterSpacing,
+                      ),
+                    ),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -183,26 +199,36 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         );
                       },
-                      child: const Text(
+                      child: Text(
                         'Sign Up',
-                        style: TextStyle(
+                        style: AppTextStyles.body.copyWith(
+                          color: AppColors.primary,
+                          fontSize: themeProvider.fontSize,
+                          height: themeProvider.lineHeight,
+                          letterSpacing: themeProvider.letterSpacing,
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                          fontSize: 16,
                         ),
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 24),
-                const Row(
+                Row(
                   children: [
-                    Expanded(child: Divider()),
+                    Expanded(child: Divider(color: AppColors.border)),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: Text('Or with'),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        'Or with',
+                        style: AppTextStyles.body.copyWith(
+                          color: AppColors.textSecondary,
+                          fontSize: themeProvider.fontSize,
+                          height: themeProvider.lineHeight,
+                          letterSpacing: themeProvider.letterSpacing,
+                        ),
+                      ),
                     ),
-                    Expanded(child: Divider()),
+                    Expanded(child: Divider(color: AppColors.border)),
                   ],
                 ),
                 const SizedBox(height: 24),
@@ -214,10 +240,18 @@ class _SignInScreenState extends State<SignInScreen> {
                     'assets/images/google_logo.png',
                     height: 24,
                   ),
-                  label: const Text('Sign in with Google'),
+                  label: Text(
+                    'Sign in with Google',
+                    style: AppTextStyles.button.copyWith(
+                      color: AppColors.textPrimary,
+                      fontSize: themeProvider.fontSize,
+                      height: themeProvider.lineHeight,
+                      letterSpacing: themeProvider.letterSpacing,
+                    ),
+                  ),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    side: const BorderSide(color: Colors.grey),
+                    side: BorderSide(color: AppColors.border),
                   ),
                 ),
               ],

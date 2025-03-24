@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ai_tale/constants/colors.dart';
+import 'package:ai_tale/constants/text_styles.dart';
+import 'package:provider/provider.dart';
+import '../providers/theme_provider.dart';
 
 class CustomInput extends StatelessWidget {
   final TextEditingController controller;
@@ -20,16 +24,19 @@ class CustomInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    AppColors.setTheme(themeProvider.isDarkMode);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: const TextStyle(
-            color: Color(0xFF2D3142),
-            fontSize: 16,
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w500,
+          style: AppTextStyles.body.copyWith(
+            color: AppColors.textPrimary,
+            fontSize: themeProvider.fontSize,
+            height: themeProvider.lineHeight,
+            letterSpacing: themeProvider.letterSpacing,
           ),
         ),
         const SizedBox(height: 8),
@@ -38,41 +45,43 @@ class CustomInput extends StatelessWidget {
           obscureText: obscureText,
           keyboardType: keyboardType,
           validator: validator,
-          style: const TextStyle(
-            color: Color(0xFF2D3142),
-            fontSize: 16,
-            fontFamily: 'Inter',
+          style: AppTextStyles.body.copyWith(
+            color: AppColors.textPrimary,
+            fontSize: themeProvider.fontSize,
+            height: themeProvider.lineHeight,
+            letterSpacing: themeProvider.letterSpacing,
           ),
           decoration: InputDecoration(
             filled: true,
-            fillColor: Colors.white,
+            fillColor: AppColors.surface,
             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+              borderSide: BorderSide(color: AppColors.border),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+              borderSide: BorderSide(color: AppColors.border),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFF6C63FF), width: 2),
+              borderSide: BorderSide(color: AppColors.primary, width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.red),
+              borderSide: BorderSide(color: AppColors.error),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.red, width: 2),
+              borderSide: BorderSide(color: AppColors.error, width: 2),
             ),
             suffixIcon: suffixIcon,
             hintText: 'Enter your ${label.toLowerCase()}',
-            hintStyle: const TextStyle(
-              color: Color(0xFF666666),
-              fontSize: 16,
-              fontFamily: 'Inter',
+            hintStyle: AppTextStyles.body.copyWith(
+              color: AppColors.textSecondary,
+              fontSize: themeProvider.fontSize,
+              height: themeProvider.lineHeight,
+              letterSpacing: themeProvider.letterSpacing,
             ),
           ),
         ),

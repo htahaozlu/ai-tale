@@ -11,6 +11,9 @@ class AppColors {
   static const Color cardBackgroundLightDark = Color(0xFF4A4D63);
   static const Color textPrimaryDark = Colors.white;
   static const Color textSecondaryDark = Color.fromRGBO(255, 255, 255, 0.54);
+  static const Color borderDark = Color(0xFF4A4D63);
+  static const Color surfaceDark = Color(0xFF2D3142);
+  static const Color errorDark = Color(0xFFFF6B6B);
 
   // Light Theme Colors
   static const Color backgroundLight = Color(0xFFF5F5F7);
@@ -18,6 +21,9 @@ class AppColors {
   static const Color cardBackgroundLightLight = Color(0xFFF0F0F5);
   static const Color textPrimaryLight = Color(0xFF2D3142);
   static const Color textSecondaryLight = Color(0xFF666B7A);
+  static const Color borderLight = Color(0xFFE0E0E0);
+  static const Color surfaceLight = Colors.white;
+  static const Color errorLight = Color(0xFFFF6B6B);
 
   // Dynamic Colors (will change based on theme)
   static late Color background;
@@ -25,6 +31,9 @@ class AppColors {
   static late Color cardBackgroundLighter;
   static late Color textPrimary;
   static late Color textSecondary;
+  static late Color border;
+  static late Color surface;
+  static late Color error;
 
   static const Color cardBackgroundTransparent = Color.fromRGBO(45, 49, 66, 0.5);
   static const Color overlayBackgroundDark = Color.fromRGBO(0, 0, 0, 0.7);
@@ -57,5 +66,8 @@ class AppColors {
     cardBackgroundLighter = isDark ? cardBackgroundLightDark : cardBackgroundLightLight;
     textPrimary = isDark ? textPrimaryDark : textPrimaryLight;
     textSecondary = isDark ? textSecondaryDark : textSecondaryLight;
+    border = isDark ? borderDark : borderLight;
+    surface = isDark ? surfaceDark : surfaceLight;
+    error = isDark ? errorDark : errorLight;
   }
 }

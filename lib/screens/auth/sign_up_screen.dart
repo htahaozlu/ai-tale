@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ai_tale/providers/auth_provider.dart';
+import 'package:ai_tale/providers/theme_provider.dart';
 import 'package:ai_tale/widgets/custom_input.dart';
 import 'package:ai_tale/theme/app_theme.dart';
+import 'package:ai_tale/constants/colors.dart';
+import 'package:ai_tale/constants/text_styles.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -54,7 +57,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    AppColors.setTheme(themeProvider.isDarkMode);
+
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
@@ -66,21 +73,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 60),
                 Text(
                   'Create Account',
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                    color: const Color(0xFF2D3142),
-                    fontSize: 24,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
+                  style: AppTextStyles.heading.copyWith(
+                    color: AppColors.textPrimary,
+                    fontSize: themeProvider.fontSize * 1.5,
+                    height: themeProvider.lineHeight,
+                    letterSpacing: themeProvider.letterSpacing,
                   ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
-                const Text(
+                Text(
                   'Join the world of personalized stories',
-                  style: TextStyle(
-                    color: Color(0xFF666666),
-                    fontSize: 16,
-                    fontFamily: 'Inter',
+                  style: AppTextStyles.body.copyWith(
+                    color: AppColors.textSecondary,
+                    fontSize: themeProvider.fontSize,
+                    height: themeProvider.lineHeight,
+                    letterSpacing: themeProvider.letterSpacing,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -116,7 +124,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                      color: const Color(0xFF666666),
+                      color: AppColors.textSecondary,
                     ),
                     onPressed: () {
                       setState(() {
@@ -142,7 +150,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
-                      color: const Color(0xFF666666),
+                      color: AppColors.textSecondary,
                     ),
                     onPressed: () {
                       setState(() {
@@ -155,7 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ElevatedButton(
                   onPressed: _isLoading ? null : _handleSignUp,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF6C63FF),
+                    backgroundColor: AppColors.primary,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -170,12 +178,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       color: Colors.white,
                     ),
                   )
-                      : const Text(
+                      : Text(
                     'Create Account',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Inter',
+                    style: AppTextStyles.button.copyWith(
+                      fontSize: themeProvider.fontSize,
+                      height: themeProvider.lineHeight,
+                      letterSpacing: themeProvider.letterSpacing,
                     ),
                   ),
                 ),
@@ -183,23 +191,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       'Already have an account? ',
-                      style: TextStyle(
-                        color: Color(0xFF666666),
-                        fontFamily: 'Inter',
+                      style: AppTextStyles.body.copyWith(
+                        color: AppColors.textSecondary,
+                        fontSize: themeProvider.fontSize,
+                        height: themeProvider.lineHeight,
+                        letterSpacing: themeProvider.letterSpacing,
                       ),
                     ),
                     TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text(
+                      child: Text(
                         'Sign In',
-                        style: TextStyle(
-                          color: Color(0xFF6C63FF),
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'Inter',
+                        style: AppTextStyles.body.copyWith(
+                          color: AppColors.primary,
+                          fontSize: themeProvider.fontSize,
+                          height: themeProvider.lineHeight,
+                          letterSpacing: themeProvider.letterSpacing,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
