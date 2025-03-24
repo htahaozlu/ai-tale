@@ -43,8 +43,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         Navigator.pushReplacementNamed(context, '/welcome');
       } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Registration failed. Please try again.'),
+          SnackBar(
+            content: const Text('Registration failed. Please try again.'),
             backgroundColor: AppTheme.errorColor,
           ),
         );

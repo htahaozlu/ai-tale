@@ -42,8 +42,8 @@ class _SignInScreenState extends State<SignInScreen> {
         Navigator.pushReplacementNamed(context, '/welcome');
       } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Login failed. Please try again.'),
+          SnackBar(
+            content: const Text('Login failed. Please try again.'),
             backgroundColor: AppTheme.errorColor,
           ),
         );

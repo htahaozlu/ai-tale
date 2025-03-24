@@ -9,37 +9,55 @@ import 'package:ai_tale/screens/personalization/theme_selection_screen.dart';
 import 'package:ai_tale/screens/write_tale_screen.dart';
 import 'package:ai_tale/screens/onboarding_screen.dart';
 import 'package:ai_tale/theme/app_theme.dart';
+import 'providers/theme_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<AuthProvider>(
-          create: (_) => AuthProvider(),
-        ),
-      ],
-      child: MaterialApp(
-        title: 'AI-Tale',
-        theme: AppTheme.darkTheme,
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/onboarding',
-        routes: {
-          '/onboarding': (context) => const OnboardingScreen(),
-          '/': (context) => const SignInScreen(),
-          '/welcome': (context) => const WelcomeScreen(),
-          '/home': (context) => const HomeScreen(),
-          '/character-selection': (context) => const CharacterSelectionScreen(),
-          '/theme-selection': (context) => const ThemeSelectionScreen(),
-          '/write-tale': (context) => const WriteTaleScreen(),
-        },
-      ),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return MaterialApp(
+          title: 'AI Tale',
+          theme: AppTheme.lightTheme(
+            themeProvider.colorTheme,
+            themeProvider.fontSize,
+            themeProvider.isHighContrastMode,
+          ),
+          darkTheme: AppTheme.darkTheme(
+            themeProvider.colorTheme,
+            themeProvider.fontSize,
+            themeProvider.isHighContrastMode,
+          ),
+          themeMode:
+              themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          debugShowCheckedModeBanner: false,
+          initialRoute: '/onboarding',
+          routes: {
+            '/onboarding': (context) => const OnboardingScreen(),
+            '/': (context) => const SignInScreen(),
+            '/welcome': (context) => const WelcomeScreen(),
+            '/home': (context) => const HomeScreen(),
+            '/character-selection': (context) =>
+                const CharacterSelectionScreen(),
+            '/theme-selection': (context) => const ThemeSelectionScreen(),
+            '/write-tale': (context) => const WriteTaleScreen(),
+          },
+        );
+      },
     );
   }
 }

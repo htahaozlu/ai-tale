@@ -2,69 +2,100 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  static const Color primaryColor = Color(0xFF4A90E2);
-  static const Color secondaryColor = Color(0xFF6C63FF);
-  static const Color backgroundColor = Color(0xFF1A1B35);
-  static const Color surfaceColor = Color(0xFF2A2B45);
-  static const Color accentColor = Color(0xFFFFB800);
-  static const Color textColor = Color(0xFFFFFFFF);
+  static const double smallFontSize = 14.0;
+  static const double mediumFontSize = 16.0;
+  static const double largeFontSize = 18.0;
   static const Color errorColor = Color(0xFFFF6B6B);
 
-  static ThemeData darkTheme = ThemeData(
-    primaryColor: primaryColor,
-    scaffoldBackgroundColor: backgroundColor,
-    colorScheme: const ColorScheme.dark(
-      primary: primaryColor,
-      secondary: secondaryColor,
-      surface: surfaceColor,
-      background: backgroundColor,
-      error: errorColor,
-    ),
-    textTheme: TextTheme(
-      displayLarge: GoogleFonts.poppins(
-        fontSize: 32,
-        fontWeight: FontWeight.bold,
-        color: textColor,
-      ),
-      displayMedium: GoogleFonts.poppins(
-        fontSize: 24,
-        fontWeight: FontWeight.w600,
-        color: textColor,
-      ),
-      bodyLarge: GoogleFonts.poppins(
-        fontSize: 16,
-        color: textColor,
-      ),
-      bodyMedium: GoogleFonts.poppins(
-        fontSize: 14,
-        color: textColor,
-      ),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
+  static ThemeData lightTheme(String colorTheme, double fontSize, bool isHighContrast) {
+    final Map<String, Color> themeColors = {
+      'default': Colors.blue,
+      'magical_forest': Colors.green[700]!,
+      'ocean_blue': Colors.blue[700]!,
+      'royal_purple': Colors.purple[700]!,
+    };
+
+    final primaryColor = themeColors[colorTheme] ?? themeColors['default']!;
+
+    return ThemeData(
+      primaryColor: primaryColor,
+      brightness: Brightness.light,
+      scaffoldBackgroundColor: isHighContrast ? Colors.white : Colors.grey[50],
+      appBarTheme: AppBarTheme(
         backgroundColor: primaryColor,
-        foregroundColor: textColor,
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
+        elevation: 0,
+      ),
+      textTheme: TextTheme(
+        bodyLarge: TextStyle(
+          fontSize: fontSize,
+          color: isHighContrast ? Colors.black : Colors.grey[800],
+        ),
+        bodyMedium: TextStyle(
+          fontSize: fontSize - 2,
+          color: isHighContrast ? Colors.black : Colors.grey[800],
+        ),
+        titleLarge: TextStyle(
+          fontSize: fontSize + 4,
+          fontWeight: FontWeight.bold,
+          color: isHighContrast ? Colors.black : Colors.grey[900],
         ),
       ),
-    ),
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: surfaceColor,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide.none,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: primaryColor,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
       ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide.none,
+    );
+  }
+
+  static ThemeData darkTheme(String colorTheme, double fontSize, bool isHighContrast) {
+    final Map<String, Color> themeColors = {
+      'default': Colors.blue[400]!,
+      'magical_forest': Colors.green[400]!,
+      'ocean_blue': Colors.blue[400]!,
+      'royal_purple': Colors.purple[400]!,
+    };
+
+    final primaryColor = themeColors[colorTheme] ?? themeColors['default']!;
+
+    return ThemeData(
+      primaryColor: primaryColor,
+      brightness: Brightness.dark,
+      scaffoldBackgroundColor: isHighContrast ? Colors.black : Colors.grey[900],
+      appBarTheme: AppBarTheme(
+        backgroundColor: primaryColor,
+        elevation: 0,
       ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: const BorderSide(color: primaryColor),
+      textTheme: TextTheme(
+        bodyLarge: TextStyle(
+          fontSize: fontSize,
+          color: isHighContrast ? Colors.white : Colors.grey[300],
+        ),
+        bodyMedium: TextStyle(
+          fontSize: fontSize - 2,
+          color: isHighContrast ? Colors.white : Colors.grey[300],
+        ),
+        titleLarge: TextStyle(
+          fontSize: fontSize + 4,
+          fontWeight: FontWeight.bold,
+          color: isHighContrast ? Colors.white : Colors.grey[100],
+        ),
       ),
-    ),
-  );
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: primaryColor,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ),
+    );
+  }
 }

@@ -3,6 +3,7 @@ import 'package:ai_tale/widgets/custom_card.dart';
 import 'package:ai_tale/constants/colors.dart';
 import 'package:ai_tale/constants/text_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ai_tale/screens/personalization/personalization_settings_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,6 +12,50 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          GestureDetector(
+            onTapDown: (details) {
+              final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+              showMenu(
+                context: context,
+                position: RelativeRect.fromRect(
+                  details.globalPosition & const Size(40, 40),
+                  Offset.zero & overlay.size,
+                ),
+                items: [
+                  const PopupMenuItem(
+                    value: 'profile',
+                    child: Text('Profile'),
+                  ),
+                  const PopupMenuItem(
+                    value: 'settings',
+                    child: Text('Personalization'),
+                  ),
+                ],
+              ).then((value) {
+                if (value == 'settings') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PersonalizationSettingsScreen(),
+                    ),
+                  );
+                }
+                // Profile page action will be added later
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircleAvatar(
+                backgroundImage: const AssetImage('assets/images/backgrounds/profile.jpg'),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -112,6 +157,29 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+        currentIndex: 0,
+        onTap: (index) {
+          if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const PersonalizationSettingsScreen(),
+              ),
+            );
+          }
+        },
       ),
     );
   }
