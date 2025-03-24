@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../constants/colors.dart';
 import '../../providers/theme_provider.dart';
 import '../../theme/app_theme.dart';
 
@@ -71,17 +72,55 @@ class PersonalizationSettingsScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       children: [
-                        Slider(
-                          value: themeProvider.fontSize,
-                          min: AppTheme.smallFontSize,
-                          max: AppTheme.largeFontSize,
-                          divisions: 2,
-                          label: _getFontSizeLabel(themeProvider.fontSize),
-                          onChanged: (value) => themeProvider.setFontSize(value),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Current Size: ${themeProvider.fontSize.toStringAsFixed(1)}',
+                              style: TextStyle(
+                                color: AppColors.textPrimary,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: AppColors.primary.withAlpha(25),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                _getFontSizeLabel(themeProvider.fontSize),
+                                style: TextStyle(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
+                        const SizedBox(height: 16),
+                        SliderTheme(
+                          data: SliderThemeData(
+                            activeTrackColor: AppColors.primary,
+                            inactiveTrackColor: AppColors.primary.withAlpha(51),
+                            thumbColor: AppColors.primary,
+                            overlayColor: AppColors.primary.withAlpha(51),
+                          ),
+                          child: Slider(
+                            value: themeProvider.fontSize,
+                            min: AppTheme.smallFontSize,
+                            max: AppTheme.largeFontSize,
+                            divisions: 2,
+                            onChanged: (value) => themeProvider.setFontSize(value),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
                         Text(
                           'Sample Text',
-                          style: TextStyle(fontSize: themeProvider.fontSize),
+                          style: TextStyle(
+                            fontSize: themeProvider.fontSize,
+                            color: AppColors.textPrimary,
+                          ),
                         ),
                       ],
                     ),
@@ -89,35 +128,63 @@ class PersonalizationSettingsScreen extends StatelessWidget {
                 ],
               ),
               _buildSection(
-                title: 'Color Theme',
+                title: 'Text Density',
                 children: [
-                  _buildColorThemeOption(
-                    context,
-                    themeProvider,
-                    'default',
-                    'Default',
-                    Colors.blue,
+                  ListTile(
+                    title: Text(
+                      'Line Spacing',
+                      style: TextStyle(color: AppColors.textPrimary),
+                    ),
+                    subtitle: Text(
+                      'Adjust the space between lines of text',
+                      style: TextStyle(color: AppColors.textSecondary),
+                    ),
+                    trailing: DropdownButton<double>(
+                      value: themeProvider.lineHeight ?? 1.2,
+                      items: [
+                        DropdownMenuItem(
+                          value: 1.0,
+                          child: Text('Compact', style: TextStyle(color: AppColors.textPrimary)),
+                        ),
+                        DropdownMenuItem(
+                          value: 1.2,
+                          child: Text('Normal', style: TextStyle(color: AppColors.textPrimary)),
+                        ),
+                        DropdownMenuItem(
+                          value: 1.5,
+                          child: Text('Relaxed', style: TextStyle(color: AppColors.textPrimary)),
+                        ),
+                      ],
+                      onChanged: (value) => themeProvider.setLineHeight(value ?? 1.2),
+                    ),
                   ),
-                  _buildColorThemeOption(
-                    context,
-                    themeProvider,
-                    'magical_forest',
-                    'Magical Forest',
-                    Colors.green[700]!,
-                  ),
-                  _buildColorThemeOption(
-                    context,
-                    themeProvider,
-                    'ocean_blue',
-                    'Ocean Blue',
-                    Colors.blue[700]!,
-                  ),
-                  _buildColorThemeOption(
-                    context,
-                    themeProvider,
-                    'royal_purple',
-                    'Royal Purple',
-                    Colors.purple[700]!,
+                  ListTile(
+                    title: Text(
+                      'Letter Spacing',
+                      style: TextStyle(color: AppColors.textPrimary),
+                    ),
+                    subtitle: Text(
+                      'Adjust the space between characters',
+                      style: TextStyle(color: AppColors.textSecondary),
+                    ),
+                    trailing: DropdownButton<double>(
+                      value: themeProvider.letterSpacing ?? 0.0,
+                      items: [
+                        DropdownMenuItem(
+                          value: -0.5,
+                          child: Text('Tight', style: TextStyle(color: AppColors.textPrimary)),
+                        ),
+                        DropdownMenuItem(
+                          value: 0.0,
+                          child: Text('Normal', style: TextStyle(color: AppColors.textPrimary)),
+                        ),
+                        DropdownMenuItem(
+                          value: 0.5,
+                          child: Text('Loose', style: TextStyle(color: AppColors.textPrimary)),
+                        ),
+                      ],
+                      onChanged: (value) => themeProvider.setLetterSpacing(value ?? 0.0),
+                    ),
                   ),
                 ],
               ),

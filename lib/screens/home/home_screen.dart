@@ -4,12 +4,16 @@ import 'package:ai_tale/widgets/custom_card.dart';
 import 'package:ai_tale/constants/colors.dart';
 import 'package:ai_tale/constants/text_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import '../../providers/theme_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -83,7 +87,12 @@ class HomeScreen extends StatelessWidget {
 
                     Text(
                       'You may like',
-                      style: AppTextStyles.subtitle,
+                      style: AppTextStyles.subtitle.copyWith(
+                        color: AppColors.textPrimary,
+                        fontSize: themeProvider.fontSize,
+                        height: themeProvider.lineHeight,
+                        letterSpacing: themeProvider.letterSpacing,
+                      ),
                     ),
                     const SizedBox(height: 16),
                     SizedBox(

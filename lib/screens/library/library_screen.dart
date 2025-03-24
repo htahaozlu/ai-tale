@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
+import 'package:provider/provider.dart';
+import '../../providers/theme_provider.dart';
 
 class LibraryScreen extends StatelessWidget {
   const LibraryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -20,6 +24,9 @@ class LibraryScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.bold,
+                    fontSize: themeProvider.fontSize * 1.5,
+                    height: themeProvider.lineHeight,
+                    letterSpacing: themeProvider.letterSpacing,
                   ),
                 ),
               ),
