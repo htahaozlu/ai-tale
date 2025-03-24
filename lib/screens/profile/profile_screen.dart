@@ -142,7 +142,7 @@ class ProfileScreen extends StatelessWidget {
           color: isDestructive ? Colors.red : AppColors.textPrimary,
         ),
       ),
-      trailing: const Icon(
+      trailing: Icon(
         Icons.arrow_forward_ios,
         size: 16,
         color: AppColors.textSecondary,

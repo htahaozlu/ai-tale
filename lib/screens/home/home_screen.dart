@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    AppColors.setTheme(themeProvider.isDarkMode);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -60,7 +61,10 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomCard(
-                      title: 'Write',
+                      title: Text(
+                        'Write',
+                        style: TextStyle(color: AppColors.textPrimary),
+                      ),
                       height: 180,
                       width: double.infinity,
                       showButton: true,
@@ -75,14 +79,16 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(height: 16),
 
                     CustomCard(
-                      title: 'Visualize',
+                      title: Text(
+                        'Visualize',
+                        style: TextStyle(color: AppColors.textPrimary),
+                      ),
                       height: 120,
                       width: double.infinity,
                       onTap: () {},
                       gradient: AppColors.cardGradient,
                       imagePath: 'assets/images/backgrounds/visualize.png',
                     ),
-
                     const SizedBox(height: 32),
 
                     Text(
@@ -105,7 +111,10 @@ class HomeScreen extends StatelessWidget {
                             child: SizedBox(
                               width: 160,
                               child: CustomCard(
-                                title: 'Fairy',
+                                title: Text(
+                                  'Fairy',
+                                  style: TextStyle(color: AppColors.textPrimary),
+                                ),
                                 imagePath: 'assets/images/backgrounds/magic_forest.jpg',
                                 onTap: () {},
                               ),
@@ -116,7 +125,10 @@ class HomeScreen extends StatelessWidget {
                             child: SizedBox(
                               width: 160,
                               child: CustomCard(
-                                title: 'Fairy',
+                                title: Text(
+                                  'Castle',
+                                  style: TextStyle(color: AppColors.textPrimary),
+                                ),
                                 imagePath: 'assets/images/backgrounds/medieval_castle.jpg',
                                 onTap: () {},
                               ),
@@ -127,7 +139,10 @@ class HomeScreen extends StatelessWidget {
                             child: SizedBox(
                               width: 160,
                               child: CustomCard(
-                                title: 'Space',
+                                title: Text(
+                                  'Space',
+                                  style: TextStyle(color: AppColors.textPrimary),
+                                ),
                                 imagePath: 'assets/images/backgrounds/space_adventure.jpg',
                                 onTap: () {},
                               ),

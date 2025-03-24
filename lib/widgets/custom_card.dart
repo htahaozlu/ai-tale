@@ -3,7 +3,7 @@ import 'package:ai_tale/constants/colors.dart';
 import 'package:ai_tale/constants/text_styles.dart';
 
 class CustomCard extends StatelessWidget {
-  final String title;
+  final Widget title;
   final String? imagePath;
   final VoidCallback onTap;
   final double? height;
@@ -36,9 +36,9 @@ class CustomCard extends StatelessWidget {
           gradient: gradient,
           image: imagePath != null
               ? DecorationImage(
-            image: AssetImage(imagePath!),
-            fit: BoxFit.cover,
-          )
+                  image: AssetImage(imagePath!),
+                  fit: BoxFit.cover,
+                )
               : null,
           boxShadow: const [
             BoxShadow(
@@ -58,10 +58,7 @@ class CustomCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: AppTextStyles.cardTitle,
-              ),
+              title,
               if (showButton) ...[
                 const SizedBox(height: 8),
                 ElevatedButton(

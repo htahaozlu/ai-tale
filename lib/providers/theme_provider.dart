@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../constants/colors.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  bool _isDarkMode = true;
+  bool _isDarkMode = false;
   double _fontSize = 16.0;
   String _colorTheme = 'default';
   bool _isHighContrastMode = false;
@@ -35,11 +36,13 @@ class ThemeProvider extends ChangeNotifier {
     _isHighContrastMode = prefs.getBool(HIGH_CONTRAST_KEY) ?? false;
     _lineHeight = prefs.getDouble(LINE_HEIGHT_KEY) ?? 1.2;
     _letterSpacing = prefs.getDouble(LETTER_SPACING_KEY) ?? 0.0;
+    AppColors.setTheme(_isDarkMode);
     notifyListeners();
   }
 
   Future<void> toggleDarkMode() async {
     _isDarkMode = !_isDarkMode;
+    AppColors.setTheme(_isDarkMode);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(DARK_MODE_KEY, _isDarkMode);
     notifyListeners();

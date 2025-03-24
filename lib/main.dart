@@ -9,6 +9,7 @@ import 'package:ai_tale/screens/auth/sign_in_screen.dart';
 import 'package:ai_tale/screens/auth/sign_up_screen.dart';
 import 'package:ai_tale/screens/onboarding_screen.dart';
 import 'package:ai_tale/screens/personalization/personalization_settings_screen.dart';
+import 'constants/colors.dart';
 import 'screens/main_screen.dart';
 import 'theme/app_theme.dart';
 import 'providers/theme_provider.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
+        AppColors.setTheme(themeProvider.isDarkMode);
         return MaterialApp(
           title: 'AI Tale',
           theme: AppTheme.lightTheme(

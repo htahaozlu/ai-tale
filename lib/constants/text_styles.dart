@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 
 class AppTextStyles {
-  static const TextStyle heading = TextStyle(
+  static TextStyle heading = TextStyle(
     color: AppColors.textPrimary,
     fontSize: 24,
     fontFamily: 'Poppins',
@@ -17,14 +17,14 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
   );
 
-  static const TextStyle cardTitle = TextStyle(
+  static TextStyle cardTitle = TextStyle(
     color: AppColors.textPrimary,
     fontSize: 24,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w600,
   );
 
-  static const TextStyle subtitle = TextStyle(
+  static TextStyle subtitle = TextStyle(
     color: AppColors.textPrimary,
     fontSize: 20,
     fontFamily: 'Poppins',
@@ -36,7 +36,7 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
   );
 
-  static const TextStyle bottomNavText = TextStyle(
+  static TextStyle bottomNavText = TextStyle(
     color: AppColors.textPrimary,
     fontSize: 12,
     fontFamily: 'Inter',
@@ -48,19 +48,19 @@ class AppTextStyles {
     fontFamily: 'Inter',
   );
 
-  static const TextStyle inputText = TextStyle(
+  static TextStyle inputText = TextStyle(
     color: AppColors.textPrimary,
     fontSize: 16,
     fontFamily: 'Inter',
   );
 
-  static const TextStyle inputHint = TextStyle(
+  static TextStyle inputHint = TextStyle(
     color: AppColors.textSecondary,
     fontSize: 16,
     fontFamily: 'Inter',
   );
 
-  static const TextStyle inputCounter = TextStyle(
+  static TextStyle inputCounter = TextStyle(
     color: AppColors.textSecondary,
     fontSize: 14,
     fontFamily: 'Inter',

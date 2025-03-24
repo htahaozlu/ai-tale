@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../constants/colors.dart';
 
 class AppTheme {
   static const double smallFontSize = 14.0;
@@ -8,41 +9,54 @@ class AppTheme {
   static const Color errorColor = Color(0xFFFF6B6B);
 
   static ThemeData lightTheme(String colorTheme, double fontSize, bool isHighContrast) {
-    final Map<String, Color> themeColors = {
-      'default': Colors.blue,
-      'magical_forest': Colors.green[700]!,
-      'ocean_blue': Colors.blue[700]!,
-      'royal_purple': Colors.purple[700]!,
-    };
-
-    final primaryColor = themeColors[colorTheme] ?? themeColors['default']!;
+    AppColors.setTheme(false);
 
     return ThemeData(
-      primaryColor: primaryColor,
+      primaryColor: AppColors.primary,
       brightness: Brightness.light,
-      scaffoldBackgroundColor: isHighContrast ? Colors.white : Colors.grey[50],
+      scaffoldBackgroundColor: AppColors.background,
+      cardColor: AppColors.cardBackground,
       appBarTheme: AppBarTheme(
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.cardBackground,
         elevation: 0,
+        iconTheme: IconThemeData(color: AppColors.textPrimary),
+        titleTextStyle: TextStyle(
+          color: AppColors.textPrimary,
+          fontSize: fontSize + 4,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       textTheme: TextTheme(
         bodyLarge: TextStyle(
           fontSize: fontSize,
-          color: isHighContrast ? Colors.black : Colors.grey[800],
+          color: AppColors.textPrimary,
         ),
         bodyMedium: TextStyle(
           fontSize: fontSize - 2,
-          color: isHighContrast ? Colors.black : Colors.grey[800],
+          color: AppColors.textSecondary,
         ),
         titleLarge: TextStyle(
           fontSize: fontSize + 4,
           fontWeight: FontWeight.bold,
-          color: isHighContrast ? Colors.black : Colors.grey[900],
+          color: AppColors.textPrimary,
         ),
+        titleMedium: TextStyle(
+          fontSize: fontSize + 2,
+          fontWeight: FontWeight.w600,
+          color: AppColors.textPrimary,
+        ),
+        labelLarge: TextStyle(
+          fontSize: fontSize,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textPrimary,
+        ),
+      ),
+      iconTheme: IconThemeData(
+        color: AppColors.textPrimary,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: primaryColor,
+          backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           shape: RoundedRectangleBorder(
@@ -54,41 +68,54 @@ class AppTheme {
   }
 
   static ThemeData darkTheme(String colorTheme, double fontSize, bool isHighContrast) {
-    final Map<String, Color> themeColors = {
-      'default': Colors.blue[400]!,
-      'magical_forest': Colors.green[400]!,
-      'ocean_blue': Colors.blue[400]!,
-      'royal_purple': Colors.purple[400]!,
-    };
-
-    final primaryColor = themeColors[colorTheme] ?? themeColors['default']!;
+    AppColors.setTheme(true);
 
     return ThemeData(
-      primaryColor: primaryColor,
+      primaryColor: AppColors.primary,
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: isHighContrast ? Colors.black : Colors.grey[900],
+      scaffoldBackgroundColor: AppColors.background,
+      cardColor: AppColors.cardBackground,
       appBarTheme: AppBarTheme(
-        backgroundColor: primaryColor,
+        backgroundColor: AppColors.cardBackground,
         elevation: 0,
+        iconTheme: IconThemeData(color: AppColors.textPrimary),
+        titleTextStyle: TextStyle(
+          color: AppColors.textPrimary,
+          fontSize: fontSize + 4,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       textTheme: TextTheme(
         bodyLarge: TextStyle(
           fontSize: fontSize,
-          color: isHighContrast ? Colors.white : Colors.grey[300],
+          color: AppColors.textPrimary,
         ),
         bodyMedium: TextStyle(
           fontSize: fontSize - 2,
-          color: isHighContrast ? Colors.white : Colors.grey[300],
+          color: AppColors.textSecondary,
         ),
         titleLarge: TextStyle(
           fontSize: fontSize + 4,
           fontWeight: FontWeight.bold,
-          color: isHighContrast ? Colors.white : Colors.grey[100],
+          color: AppColors.textPrimary,
         ),
+        titleMedium: TextStyle(
+          fontSize: fontSize + 2,
+          fontWeight: FontWeight.w600,
+          color: AppColors.textPrimary,
+        ),
+        labelLarge: TextStyle(
+          fontSize: fontSize,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textPrimary,
+        ),
+      ),
+      iconTheme: IconThemeData(
+        color: AppColors.textPrimary,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: primaryColor,
+          backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           shape: RoundedRectangleBorder(

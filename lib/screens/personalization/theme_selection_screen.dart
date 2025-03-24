@@ -55,7 +55,7 @@ class ThemeSelectionScreen extends StatelessWidget {
                 itemCount: themes.length,
                 itemBuilder: (context, index) {
                   return CustomCard(
-                    title: themes[index]['name']!,
+                    title: Text(themes[index]['name']!),
                     imagePath: themes[index]['image']!,
                     onTap: () {
                       Navigator.pushReplacementNamed(context, '/write-tale');

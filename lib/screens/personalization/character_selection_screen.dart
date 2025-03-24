@@ -53,7 +53,7 @@ class CharacterSelectionScreen extends StatelessWidget {
                 itemCount: characters.length,
                 itemBuilder: (context, index) {
                   return CustomCard(
-                    title: characters[index]['name']!,
+                    title: Text(characters[index]['name']!),
                     imagePath: characters[index]['image']!,
                     onTap: () {
                       Navigator.pushNamed(context, '/theme-selection');
