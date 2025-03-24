@@ -24,7 +24,7 @@ class WelcomeScreen extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 32),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/home');
+                    Navigator.pushReplacementNamed(context, '/main');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryLight.withAlpha(100),
