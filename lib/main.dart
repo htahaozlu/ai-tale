@@ -55,7 +55,9 @@ class MyApp extends StatelessWidget {
             '/': (context) => const SignInScreen(),
             '/sign-up': (context) => const SignUpScreen(),
             '/welcome': (context) => const WelcomeScreen(),
-            '/main': (context) => const MainScreen(),
+            '/main': (context) => MainScreen(
+              initialIndex: ModalRoute.of(context)?.settings.arguments as int?,
+            ),
             '/personalization': (context) => const PersonalizationSettingsScreen(),
             '/character-selection': (context) =>
             const CharacterSelectionScreen(),

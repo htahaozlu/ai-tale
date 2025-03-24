@@ -1,4 +1,3 @@
-import 'package:ai_tale/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_tale/widgets/custom_card.dart';
 import 'package:ai_tale/constants/colors.dart';
@@ -34,17 +33,13 @@ class HomeScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProfileScreen(),
-                  ),
-                );
+                Navigator.pushNamed(context, '/main', arguments: 3);
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CircleAvatar(
-                  backgroundImage: const AssetImage('assets/images/backgrounds/profile.jpg'),
+                  backgroundImage:
+                      const AssetImage('assets/images/backgrounds/profile.jpg'),
                 ),
               ),
             ),
@@ -75,9 +70,7 @@ class HomeScreen extends StatelessWidget {
                       imagePath: 'assets/images/backgrounds/write.png',
                       gradient: AppColors.primaryGradient,
                     ),
-
                     const SizedBox(height: 16),
-
                     CustomCard(
                       title: Text(
                         'Visualize',
@@ -90,7 +83,6 @@ class HomeScreen extends StatelessWidget {
                       imagePath: 'assets/images/backgrounds/visualize.png',
                     ),
                     const SizedBox(height: 32),
-
                     Text(
                       'You may like',
                       style: AppTextStyles.subtitle.copyWith(
@@ -113,9 +105,11 @@ class HomeScreen extends StatelessWidget {
                               child: CustomCard(
                                 title: Text(
                                   'Fairy',
-                                  style: TextStyle(color: AppColors.textPrimary),
+                                  style:
+                                      TextStyle(color: AppColors.textPrimary),
                                 ),
-                                imagePath: 'assets/images/backgrounds/magic_forest.jpg',
+                                imagePath:
+                                    'assets/images/backgrounds/magic_forest.jpg',
                                 onTap: () {},
                               ),
                             ),
@@ -127,9 +121,11 @@ class HomeScreen extends StatelessWidget {
                               child: CustomCard(
                                 title: Text(
                                   'Castle',
-                                  style: TextStyle(color: AppColors.textPrimary),
+                                  style:
+                                      TextStyle(color: AppColors.textPrimary),
                                 ),
-                                imagePath: 'assets/images/backgrounds/medieval_castle.jpg',
+                                imagePath:
+                                    'assets/images/backgrounds/medieval_castle.jpg',
                                 onTap: () {},
                               ),
                             ),
@@ -141,9 +137,11 @@ class HomeScreen extends StatelessWidget {
                               child: CustomCard(
                                 title: Text(
                                   'Space',
-                                  style: TextStyle(color: AppColors.textPrimary),
+                                  style:
+                                      TextStyle(color: AppColors.textPrimary),
                                 ),
-                                imagePath: 'assets/images/backgrounds/space_adventure.jpg',
+                                imagePath:
+                                    'assets/images/backgrounds/space_adventure.jpg',
                                 onTap: () {},
                               ),
                             ),
